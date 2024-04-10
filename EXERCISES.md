@@ -1,3 +1,4 @@
+
 # Exercises
 Description of exercises for the _Translation Management Systems (TMS)_ sample application implemented during the workshop __Cloud Native Application Development with AWS Container Services__.
 

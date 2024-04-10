@@ -21,6 +21,25 @@ async function storeRequest (requestData) {
         return { status: 200, data: { "id": `dummy-${id}-dummy` } };
 
     // TODO Exercise 3: Store the request to dynamoDB
+    const item = {
+        TableName: env.ddbTable,
+        Item: {
+            requestId: id,
+            data: {
+                ...requestData,
+                state: 'pending',
+                ts: new Date().toISOString()
+            }
+        }
+    };
+
+    try {
+        await docClient.send(new PutCommand(item));
+        return { status: 201, data: { id } };
+    } catch (error) {
+        console.error("Error saving data to DynamoDB", error);
+        return { status: 500, data: 'Error storing resource' };
+    }
     // ...
 
 }
